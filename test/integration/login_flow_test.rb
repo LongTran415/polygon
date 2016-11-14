@@ -1,33 +1,6 @@
 require 'test_helper'
 
 class LoginFlowTest < ActionDispatch::IntegrationTest
-  # makes users.yml availiable
-  fixtures :users
-
-  def invalid_user_params
-    # invalid_user_params object:
-    {
-      user: {
-        username: "blah",
-        password: "blah"
-      }
-    }
-  end
-
-  def valid_user_params
-    # valid_user_params object:
-    {
-      user: {
-        username: users(:two).username,
-        password: users(:two).password
-      }
-    }
-  end
-
-  def login!
-    post sessions_path, params: valid_user_params
-    follow_redirect!
-  end
 
   test "can see the login button on homepage" do
     get "/"
@@ -39,8 +12,8 @@ class LoginFlowTest < ActionDispatch::IntegrationTest
 
   test "we see a input for username in the login page" do
     get new_session_path
-    assert_select "input.username" do
-      assert_select "[name=?]", "user[username]"
+    assert_select "input.name" do
+      assert_select "[name=?]", "user[name]"
     end
   end
 
@@ -66,7 +39,7 @@ class LoginFlowTest < ActionDispatch::IntegrationTest
       end
   end
 
-  test "when logging in with invaild user, you are redirected to  new_session_path" do
+  test "when logging in with invaild user, you are redirected to new_session_path" do
     post sessions_path, params: invalid_user_params
     assert_redirected_to new_session_path
   end
