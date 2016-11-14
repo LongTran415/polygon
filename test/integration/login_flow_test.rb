@@ -1,33 +1,6 @@
 require 'test_helper'
 
 class LoginFlowTest < ActionDispatch::IntegrationTest
-  # makes users.yml availiable
-  fixtures :users
-
-  def invalid_user_params
-    # invalid_user_params object:
-    {
-      user: {
-        username: "blah",
-        password: "blah"
-      }
-    }
-  end
-
-  def valid_user_params
-    # valid_user_params object:
-    {
-      user: {
-        username: users(:two).username,
-        password: users(:two).password
-      }
-    }
-  end
-
-  def login!
-    post sessions_path, params: valid_user_params
-    follow_redirect!
-  end
 
   test "can see the login button on homepage" do
     get "/"
