@@ -86,4 +86,20 @@ class LoginFlowTest < ActionDispatch::IntegrationTest
     assert_select "a.logout", "Logout"
   end
 
+  test "when logging out, you are redirected to sessions_new page" do
+    post sessions_path, params: valid_user_params
+    follow_redirect!
+    delete sessions_path
+    assert_redirected_to new_session_path
+  end
+
+
+  test "when logged out, the logout button changes to login" do
+    post sessions_path, params: valid_user_params
+    follow_redirect!
+    delete sessions_path
+    follow_redirect!
+    assert_select "a.login", "Login"
+  end
+
 end
