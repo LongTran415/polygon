@@ -72,7 +72,8 @@ class EntriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def entry_params
-      # looks for key entry and only allows certain params 
+      # looks for key entry and only allows certain params
+      params[:entry][:user_id] = session[:id] if params[:entry]
       params.require(:entry).permit(:title, :body, :user_id)
     end
 end
