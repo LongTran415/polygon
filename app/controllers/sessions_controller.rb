@@ -8,7 +8,9 @@ class SessionsController < ApplicationController
 
   # POST /sessions
   def create
-    @user = User.authenticate(params[:user])
+    # will return false or return user 
+    @user = User.find_by(name: params[:user][:name]).try(:authenticate, params[:user][:password])
+
     if  @user
       session[:id] = @user.id
       redirect_to root_path
@@ -20,7 +22,7 @@ class SessionsController < ApplicationController
 
   # DELETE /sessions
   def destroy
-    reset_session 
+    reset_session
     redirect_to new_session_path
   end
 

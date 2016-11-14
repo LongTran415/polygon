@@ -11,18 +11,22 @@ class ActiveSupport::TestCase
     # invalid_user_params object:
     {
       user: {
-        username: "blah",
+        name: "blah",
         password: "blah"
       }
     }
+  end
+
+  def password
+    "punk"
   end
 
   def valid_user_params
     # valid_user_params object:
     {
       user: {
-        username: users(:two).username,
-        password: users(:two).password
+        name: users(:two).name,
+        password: password
       }
     }
   end

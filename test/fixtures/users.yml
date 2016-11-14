@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  username: MyString
+  name: MyString
   email: MyString
-  password: MyString
+  # password: Mystring
+  password_digest: $2a$10$ufFaJfg3Tsi0UMl/mfcSrOJK8Y./REC6YxysV6u/vch7DqUu0MLQK
 
 two:
-  username: long
+  name: long
   email: long@gmail.com
-  password: long
+  # password: long
+  password_digest: $2a$10$ufFaJfg3Tsi0UMl/mfcSrOJK8Y./REC6YxysV6u/vch7DqUu0MLQK

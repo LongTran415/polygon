@@ -12,8 +12,8 @@ class LoginFlowTest < ActionDispatch::IntegrationTest
 
   test "we see a input for username in the login page" do
     get new_session_path
-    assert_select "input.username" do
-      assert_select "[name=?]", "user[username]"
+    assert_select "input.name" do
+      assert_select "[name=?]", "user[name]"
     end
   end
 
@@ -39,7 +39,7 @@ class LoginFlowTest < ActionDispatch::IntegrationTest
       end
   end
 
-  test "when logging in with invaild user, you are redirected to  new_session_path" do
+  test "when logging in with invaild user, you are redirected to new_session_path" do
     post sessions_path, params: invalid_user_params
     assert_redirected_to new_session_path
   end
