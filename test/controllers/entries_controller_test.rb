@@ -15,9 +15,21 @@ class EntriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create entry" do
+  test "should not create entry unless logged in" do
+    assert_no_difference("Entry.count") do
+      post entries_url, params: { entry: { body: @entry.body, title: @entry.title } }
+    end
+
+    assert_select "#error_explanation" do
+      assert_select "li", "User must exist"
+    end
+
+  end
+
+  test "should create entry unless logged in" do
+    login!
     assert_difference('Entry.count') do
-      post entries_url, params: { entry: { body: @entry.body, title: @entry.title, user_id: @entry.user_id } }
+      post entries_url, params: { entry: { body: @entry.body, title: @entry.title } }
     end
 
     assert_redirected_to entry_url(Entry.last)
@@ -33,10 +45,21 @@ class EntriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should update entry" do
-    patch entry_url(@entry), params: { entry: { body: @entry.body, title: @entry.title, user_id: @entry.user_id } }
+  test "should not update entry when not logged in" do
+    patch entry_url(@entry), params: { entry: { body: @entry.body, title: @entry.title } }
+
+    assert_select "#error_explanation" do
+      assert_select "li", "User must exist"
+    end
+
+  end
+
+  test "should update entry when logged in" do
+    login!
+    patch entry_url(@entry), params: { entry: { body: @entry.body, title: @entry.title } }
     assert_redirected_to entry_url(@entry)
   end
+
 
   test "should destroy entry" do
     assert_difference('Entry.count', -1) do
