@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   resources :users
-  # this is your CRUD routes
   resources :entries
+  resources :sessions, only: [:new, :create, :destroy]
+  #
+  # this is your CRUD routes
   # this is same as
-  #
-  #
-  #redirect to entries index page, (entries controller index method) 
+  #redirect to entries index page, (entries controller index method)
   root to: 'entries#index'
   #
   # get "/entires", to:'entries#index'
