@@ -1,0 +1,53 @@
+command list for creating a new project :
+
+8574  gem install rails
+8575  rvm
+8576  rvm install
+8577  rvm install 2.3.1
+8578  top
+8579  top -o cpu
+8580  ps -ef 41428
+8581  top -o cpu
+8582  top
+8583  top
+8584  gem install rails
+8585  rails new polygon
+8586  ls
+8587  cd polygon
+8588  atom .
+8589  rails g
+8590  rails g scaffold
+8591  rails g scaffold entry title:string body:text user:references
+8592  rake routes
+8593  rails s
+8594  rails db:migrate
+8595  rvm use 2.3.1
+8596  rails db:migrate
+8597  cd db
+8598  ls
+8599  rate -T
+8600  raKe -T
+8601  rake -T
+8602  rails g scaffold user username:string email:string password:string
+8603  rails db:migrate
+8604  git init
+8605  git add -A
+8606  git status
+8607  cd..
+8608  cd ..
+8609  cd db
+8610  rm -rf .git
+8611  cd ..
+8612  git init
+8613  git add -A
+8614  git status
+8615  git commit
+8616  git remote add origin https://github.com/LongTran415/polygon.git
+8617  git push -u origin master
+8618  git remote add upstream
+8619  git remote add upstream https://github.com/LongTran415/polygon.git
+8620  git fetch upstream
+8621  git co -b fix_user upstream/master
+
+
+testing:

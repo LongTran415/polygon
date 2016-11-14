@@ -9,6 +9,13 @@
   </head>
 
   <body>
+    <% if logged_in? %>
+      <%= link_to "Logout", session_path, method: :delete, class: 'logout' %>
+      <%= link_to 'New Entry', new_entry_path, class: 'new-entry' %>
+    <% else %>
+      <%= link_to "Login", new_session_path, class: 'login' %>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>

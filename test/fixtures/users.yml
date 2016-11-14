@@ -6,6 +6,6 @@ one:
   password: MyString
 
 two:
-  username: MyString
-  email: MyString
-  password: MyString
+  username: long
+  email: long@gmail.com
+  password: long
