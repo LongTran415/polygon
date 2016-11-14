@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :users
   resources :entries
-  resources :sessions, only: [:new, :create, :destroy]
+  resources :sessions, only: [:new, :create]
+  # I want to create a route /sessions that responds to delete, I want to send that to controllers sessions and call destroy method
+  delete '/sessions', to: 'sessions#destroy', as: 'session'
   #
   # this is your CRUD routes
   # this is same as

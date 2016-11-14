@@ -1,6 +1,29 @@
 require 'test_helper'
 
 class LoginFlowTest < ActionDispatch::IntegrationTest
+  # makes users.yml availiable
+  fixtures :users
+
+  def invalid_user_params
+    # invalid_user_params object:
+    {
+      user: {
+        username: "blah",
+        password: "blah"
+      }
+    }
+  end
+
+  def valid_user_params
+    # valid_user_params object:
+    {
+      user: {
+        username: users(:two).username,
+        password: users(:two).password
+      }
+    }
+  end
+
   test "can see the login button on homepage" do
     get "/"
     # respec method, it grabs a webpage and aserts to see if it exist
@@ -39,19 +62,12 @@ class LoginFlowTest < ActionDispatch::IntegrationTest
   end
 
   test "when logging in with invaild user, you are redirected to  new_session_path" do
-    params = {
-      user: {username: 'abc', password: "123"}
-    }
-    post sessions_path, params: params
+    post sessions_path, params: invalid_user_params
     assert_redirected_to new_session_path
   end
 
   test "when loggin in with invaild username or passsword, you see an error message after redirect" do
-    params = {
-      user: {username: 'abc', password: "123"}
-    }
-
-    post sessions_path, params: params
+    post sessions_path, params: invalid_user_params
     follow_redirect!
     assert_select "#error_explanation" do
       assert_select 'p', "Invalid username or password..."
@@ -59,12 +75,15 @@ class LoginFlowTest < ActionDispatch::IntegrationTest
   end
 
 
-  test "when logging in with valid user, we are redirected to /" do
-    params = {
-      # comes from fixtures/user.yml
-      user: {username: 'long', password: "long"}
-    }
-    post sessions_path, params: params
+  test "when logging in with valid user, we are redirected to root_path" do
+    post sessions_path, params: valid_user_params
     assert_redirected_to root_path
   end
+
+  test "when logging in, the Login button changes to Logout" do
+    post sessions_path, params: valid_user_params
+    follow_redirect!
+    assert_select "a.logout", "Logout"
+  end
+
 end

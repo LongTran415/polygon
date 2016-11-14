@@ -8,7 +8,9 @@ class SessionsController < ApplicationController
 
   # POST /sessions
   def create
-    if  User.authenticate(params[:user])
+    @user = User.authenticate(params[:user])
+    if  @user
+      session[:id] = @user.id
       redirect_to root_path
     else
       flash[:error] = "Invalid username or password..."

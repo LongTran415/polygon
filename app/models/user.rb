@@ -2,6 +2,10 @@ class User < ApplicationRecord
 
   def self.authenticate(user = {})
     user_record = User.find_by(username: user[:username])
-    user_record.nil? ? false : user_record.password == user[:password]
+
+    return false if user_record.nil?
+    return false if user_record.password != user[:password]
+    return user_record
   end
+  
 end

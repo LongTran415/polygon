@@ -9,7 +9,12 @@
   </head>
 
   <body>
-    <%= link_to "Login", new_session_path, class: 'login' %>
+    <% if logged_in? %>
+      <%= link_to "Logout", session_path, method: :delete, class: 'logout' %>
+    <% else %>
+      <%= link_to "Login", new_session_path, class: 'login' %>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
