@@ -8,10 +8,10 @@ class SessionsController < ApplicationController
 
   # POST /sessions
   def create
-    # will return false or return user 
+    # will return false or return user
     @user = User.find_by(name: params[:user][:name]).try(:authenticate, params[:user][:password])
 
-    if  @user
+    if @user
       session[:id] = @user.id
       redirect_to root_path
     else
