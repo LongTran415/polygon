@@ -8,8 +8,12 @@ class SessionsController < ApplicationController
 
   # POST /sessions
   def create
-    flash[:error] = "Invalid username or password..."
-    redirect_to new_session_path
+    if  User.authenticate(params[:user])
+      redirect_to root_path
+    else
+      flash[:error] = "Invalid username or password..."
+      redirect_to new_session_path
+    end
   end
 
   # DELETE /sessions

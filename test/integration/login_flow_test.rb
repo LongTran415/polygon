@@ -59,8 +59,12 @@ class LoginFlowTest < ActionDispatch::IntegrationTest
   end
 
 
-  # test "when logging in, we are redirected to '/' on sucess" do
-  #   get new_session_path
-  #
-  # end
+  test "when logging in with valid user, we are redirected to /" do
+    params = {
+      # comes from fixtures/user.yml
+      user: {username: 'long', password: "long"}
+    }
+    post sessions_path, params: params
+    assert_redirected_to root_path
+  end
 end
